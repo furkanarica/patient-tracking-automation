@@ -1,0 +1,103 @@
+﻿@model HastaTakipOtomasyonu_Model.Models.BekleyenIslem
+@{
+    ViewData["Title"] = "İşlem Detayı";
+    Layout = "~/Views/Shared/_PersonelLayout.cshtml";
+}
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images/complete-logo.svg" alt="" width="72" height="72">
+        <h2>İşlem Detayı</h2>
+        <p class="lead">Lütfen aşağıdaki tüm bilgileri eksiksiz bir şekilde doldurunuz.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 order-md-1">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BekleyenIslemId" />
+            <input type="hidden" asp-for="Muayene.MuayeneId" />
+
+            <h4 class="mb-3">@Model.HastaAdSoyad</h4>
+
+            <div class="mb-3">
+                <label asp-for="HastaTc">Kimlik Numarası</label>
+                <input asp-for="HastaTc" class="form-control" readonly>
+            </div>
+
+            <hr class="mb-4">
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Doktor.DoktorAdSoyad">Doktoru</label>
+                    <input asp-for="Doktor.DoktorAdSoyad" class="form-control" readonly>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Klinik.KlinikAdi">Klinik</label>
+                    <input asp-for="Klinik.KlinikAdi" class="form-control" readonly>
+                </div>
+            </div>
+
+            <hr class="mb-4">
+
+            <div class="mb-3">
+                <label asp-for="Muayene.Durum">Hasta Durumu</label>
+                <input asp-for="Muayene.Durum" class="form-control" readonly>
+            </div>
+
+            <hr class="mb-4">
+            
+            <div class="mb-3">
+                <label asp-for="Muayene.Test">Hastaya Uygulanan Testler</label>
+                <input asp-for="Muayene.Test" class="form-control" readonly>
+            </div>
+
+            <hr class="mb-4">
+            
+            <div class="mb-3">
+                <label asp-for="Muayene.OdemeDurumu">Ödeme</label>
+                <select asp-for="Muayene.OdemeDurumu" class="form-control" required>
+                    <option value="">Ödeme</option>
+                    <option>Ödeme yapıldı</option>
+                    <option>Ödeme gerektiren bir işlem yapılmadı</option>
+                </select>
+                <span asp-validation-for="Muayene.OdemeDurumu" class="text-danger"></span>
+            </div>
+
+            <hr class="mb-4">
+
+            <div class="mb-3">
+                <label asp-for="Muayene.IslemDurumu">İşlem Durumu</label>
+                <select asp-for="Muayene.IslemDurumu" class="form-control" required>
+                    <option value="">İşlem Durumu</option>
+                    <option>Muayene Tamamlandı</option>
+                    <option>Yatış Verildi</option>
+                    <option>Taburcu Edildi</option>
+                    <option></option>
+                </select>
+                <span asp-validation-for="Muayene.IslemDurumu" class="text-danger"></span>
+            </div>
+
+            <hr class="mb-4">
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    @if (Model.Muayene.IslemDurumu == null)
+                    {
+                        <button type="submit" class="btn btn-primary form-control">Kaydet</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-secondary form-control">Güncelle</button>
+                    }
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a asp-action="PendingTransactions" class="btn btn-success form-control">Listeye Geri Dön</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+

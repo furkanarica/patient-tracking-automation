@@ -1,0 +1,137 @@
+﻿@model HastaTakipOtomasyonu_Model.Models.ViewModels.KullaniciVM
+@{
+    ViewData["Title"] = "Kullanıcı Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images/personel-logo.svg" alt="" width="72" height="72">
+        <h2>Kullanıcı İşlemleri</h2>
+        <p class="lead">Lütfen aşağıdaki tüm bilgileri eksiksiz bir şekilde doldurunuz.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Kullanici.KullaniciId" />
+                @if (Model.Kullanici != null)
+                {
+                    ViewData["Title"] = "Kullanıcı Düzenle";
+                }
+
+                <h4 class="mb-3">@ViewData["Title"]</h4>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Kullanici.Ad">Ad</label>
+                        <input asp-for="Kullanici.Ad" class="form-control" placeholder="Ad">
+                        <span asp-validation-for="Kullanici.Ad" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Kullanici.Soyad">Soyad</label>
+                        <input asp-for="Kullanici.Soyad" class="form-control" placeholder="Soyad">
+                        <span asp-validation-for="Kullanici.Soyad" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Kullanici.DogumTarihi">Doğum Tarihi</label>
+                        <input type="date" asp-for="Kullanici.DogumTarihi" class="form-control" placeholder="mm/dd/yyyy" min="1940-01-01" max="2005-12-31">
+                        <span asp-validation-for="Kullanici.DogumTarihi" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Kullanici.Cinsiyet">Cinsiyet</label>
+                        <select asp-for="Kullanici.Cinsiyet" class="form-control">
+                            <option value="">Cinsiyet</option>
+                            <option>Kadın</option>
+                            <option>Erkek</option>
+                        </select>
+                        <span asp-validation-for="Kullanici.Cinsiyet" class="text-danger"></span>
+                    </div>
+                </div>      
+                
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Kullanici.TcNo">Kimlik Numarası</label>
+                    <input asp-for="Kullanici.TcNo" class="form-control" placeholder="Kimlik Numarası" maxlength="11">
+                    <span asp-validation-for="Kullanici.TcNo" class="text-danger"></span>
+                </div>
+                
+                <hr class="mb-4">
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Kullanici.KullaniciAdi">Kullanıcı Adı</label>
+                        <input asp-for="Kullanici.KullaniciAdi" class="form-control" placeholder="Kullanıcı Adı">
+                        <span asp-validation-for="Kullanici.KullaniciAdi" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Kullanici.Sifre">Şifre</label>     
+                        <input asp-for="Kullanici.Sifre" class="form-control" placeholder="Şifre">
+                        <span asp-validation-for="Kullanici.Sifre" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Kullanici.Adres">Adres</label>
+                    <input asp-for="Kullanici.Adres" class="form-control" placeholder="Adres">
+                    <span asp-validation-for="Kullanici.Adres" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Kullanici.Mail">Mail</label>
+                    <input type="email" asp-for="Kullanici.Mail" class="form-control" placeholder="birisi@ornek.com">
+                    <span asp-validation-for="Kullanici.Mail" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                 <div class="mb-3">
+                    <label asp-for="Kullanici.Telefon">Telefon</label>
+                    <input asp-for="Kullanici.Telefon" class="form-control" placeholder="Telefon" maxlength="11">
+                    <span asp-validation-for="Kullanici.Telefon" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Kullanici.YetkiId">Yetki Türü</label>
+                    @Html.DropDownListFor(a=>a.Kullanici.YetkiId, Model.YetkiListesi, "Yetki Türü", new { @class ="form-control"})
+                    <span asp-validation-for="Kullanici.YetkiId" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @if (Model.Kullanici == null)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Kaydet</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-secondary form-control">Güncelle</button>
+                        }
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <a asp-action="Index" class="btn btn-success form-control">Listeye Geri Dön</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

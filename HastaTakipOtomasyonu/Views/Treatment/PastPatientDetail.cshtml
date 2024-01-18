@@ -1,0 +1,74 @@
+﻿@model HastaTakipOtomasyonu_Model.Models.GecmisMuayene
+@{
+    ViewData["Title"] = "Hasta Detay";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images/pastpatientdetail-logo.svg" alt="" width="72" height="72">
+        <h2>Hasta Detay</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 order-md-1">
+        <form>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="GecmisMuayeneId" />
+
+            <h4 class="mb-3">@Model.HastaAdSoyad</h4>
+
+            <div class="mb-3">
+                <label asp-for="HastaTc">Kimlik Numarası</label>
+                <input asp-for="HastaTc" class="form-control" readonly>
+            </div>
+
+            <hr class="mb-4">
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="HastaCinsiyet">Cinsiyet</label>
+                    <input asp-for="HastaCinsiyet" class="form-control" readonly>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="KanGrubu">Kan Grubu</label>
+                    <input asp-for="KanGrubu" class="form-control" readonly>
+                </div>
+            </div>
+
+            <hr class="mb-4">
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="HastaDogumTarihi">Doğum Tarihi</label>
+                    <input type="date" asp-for="HastaDogumTarihi" class="form-control" readonly>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="HastaDogumYeri">Doğum Yeri</label>
+                    <input asp-for="HastaDogumYeri" class="form-control" readonly>
+                </div>
+            </div>
+
+            <hr class="mb-4">
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="HastaAdres">Adres</label>
+                    <input asp-for="HastaAdres" class="form-control" readonly>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="HastaTelefon">Telefon</label>
+                    <input asp-for="HastaTelefon" class="form-control" readonly>
+                </div>
+            </div>
+
+            <hr class="mb-4">
+
+            <div class="mb-3">
+                <a asp-action="PastTreatments" class="btn btn-success form-control">Listeye Geri Dön</a>
+            </div>
+        </form>
+    </div>
+</div>
+

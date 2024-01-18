@@ -1,0 +1,102 @@
+﻿@model HastaTakipOtomasyonu_Model.Models.GecmisMuayene
+@{
+    ViewData["Title"] = "Muayene Detay";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images/headache-male-logo.svg" alt="" width="72" height="72">
+        <h2>Muayene Detay</h2>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-md-4 order-md-2 mb-4">
+            <form>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="GecmisMuayeneId" />
+                
+                <div class="mb-3">
+                    <label asp-for="Alerji">Alerji</label>
+                    <input asp-for="Alerji" class="form-control" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Sikayet">Şikayet</label>
+                    <textarea asp-for="Sikayet" class="form-control" rows="5" cols="33" readonly></textarea>
+                </div>
+            </form>
+        </div>
+        
+        <div class="col-md-8 order-md-1">
+            <form>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="GecmisMuayeneId" />
+                <input type="hidden" asp-for="Muayene.MuayeneId" />
+
+                <h4 class="mb-3">@Model.HastaAdSoyad</h4>
+                
+                <div class="mb-3">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        Bu hasta <strong>@Model.HastaGirisTarihi !</strong> tarihinde muayene edildi.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Muayene.Teshis">Hastalık Teşhisi</label>
+                    <input asp-for="Muayene.Teshis" class="form-control" readonly>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Muayene.Test">İstenilen Testler</label>
+                    <input asp-for="Muayene.Test" class="form-control" readonly>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Muayene.Durum">Hasta Durumu</label>
+                    <input asp-for="Muayene.Durum" class="form-control" readonly>
+                </div>
+
+                <hr class="mb-4">
+                
+                <div class="mb-3">
+                    <label asp-for="Muayene.Sonuc">Muayene Sonucu</label>
+                    <textarea asp-for="Muayene.Sonuc" class="form-control" rows="5" cols="33" readonly></textarea>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Muayene.OdemeDurumu">Ödeme</label>
+                        <input asp-for="Muayene.OdemeDurumu" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Muayene.IslemDurumu">İşlem Durumu</label>
+                        <input asp-for="Muayene.IslemDurumu" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                
+                <div class="mb-3">
+                    <a asp-action="PastTreatments" class="btn btn-success form-control">Listeye Geri Dön</a>
+                </div>
+
+            </form>
+        
+        </div>
+    
+    </div>
+
+</div>
+
+

@@ -1,0 +1,64 @@
+﻿@model HastaTakipOtomasyonu_Model.Models.Klinik
+
+@{
+    ViewData["Title"] = "Klinik Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images/hospital-logo.svg" alt="" width="72" height="72">
+        <h2>Klinik İşlemleri</h2>
+        <p class="lead">Lütfen aşağıdaki tüm bilgileri eksiksiz bir şekilde doldurunuz.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 order-md-1">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="KlinikId" />
+            @if (Model.KlinikId != 0)
+            {
+                ViewData["Title"] = "Klinik Düzenle";
+            }
+
+            <h4 class="mb-3">@ViewData["Title"]</h4>
+
+            <div class="mb-3">
+                <label asp-for="KlinikKodu">Klinik Kodu</label>
+                <input asp-for="KlinikKodu" class="form-control" placeholder="Klinik Kodu">
+                <span asp-validation-for="KlinikKodu" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="KlinikAdi">Klinik Adı</label>
+                <input asp-for="KlinikAdi" class="form-control" placeholder="Klinik Adı">
+                <span asp-validation-for="KlinikAdi" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    @if (Model.KlinikId != 0)
+                    {
+                        <button type="submit" class="btn btn-secondary form-control">Güncelle</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary form-control">Kaydet</button>
+                    }
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a asp-action="Index" class="btn btn-success form-control">Listeye Geri Dön</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

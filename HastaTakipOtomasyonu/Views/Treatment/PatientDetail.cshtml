@@ -1,0 +1,83 @@
+﻿@model HastaTakipOtomasyonu_Model.Models.Hasta
+@{
+    ViewData["Title"] = "Hasta Detay";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images/patient-detail-logo.svg" alt="" width="72" height="72">
+        <h2>Hasta Detay</h2>
+        <p class="lead">Hasta ile ilgili bilgiler aşağıda gösterilmiştir.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="HastaId" />
+
+                <h4 class="mb-3">@Model.HastaAdSoyad</h4>
+
+                <div class="mb-3">
+                    <label asp-for="HastaTc">Kimlik Numarası</label>
+                    <input asp-for="HastaTc" class="form-control" readonly>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="HastaCinsiyet">Cinsiyet</label>
+                        <input asp-for="HastaCinsiyet" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="KanGrubu">Kan Grubu</label>
+                        <input asp-for="KanGrubu" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Alerji">Alerji</label>
+                    <input asp-for="Alerji" class="form-control" placeholder="Alerji" required>
+                    <span asp-validation-for="Alerji" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Sikayet">Şikayet</label>
+                    <textarea asp-for="Sikayet" class="form-control" rows="5" cols="33" placeholder="Şikayet" required></textarea>
+                    <span asp-validation-for="Sikayet" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @if(Model.Sikayet == null && Model.Alerji == null)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Kaydet</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-secondary form-control">Güncelle</button>
+                            
+                        }
+                     </div>
+                    <div class="col-md-6 mb-3">
+                        <a asp-action="Index" class="btn btn-success form-control">Listeye Geri Dön</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

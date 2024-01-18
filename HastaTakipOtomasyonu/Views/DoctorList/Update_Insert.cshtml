@@ -1,0 +1,81 @@
+﻿@model HastaTakipOtomasyonu_Model.Models.ViewModels.DoktorVM
+@{
+    ViewData["Title"] = "Doktor Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images/doctor-logo.svg" alt="" width="72" height="72">
+        <h2>Doktor İşlemleri</h2>
+        <p class="lead">Lütfen aşağıdaki tüm bilgileri eksiksiz bir şekilde doldurunuz.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Doktor.DoktorId" />
+                @if (Model.Doktor != null)
+                {
+                    ViewData["Title"] = "Doktor Düzenle";
+                }
+
+                <h4 class="mb-3">@ViewData["Title"]</h4>
+
+                <div class="mb-3">
+                    <label asp-for="Doktor.DoktorAd">Ad</label>
+                    <input asp-for="Doktor.DoktorAd" class="form-control" placeholder="Ad">
+                    <span asp-validation-for="Doktor.DoktorAd" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Doktor.DoktorSoyad">Soyad</label>
+                    <input asp-for="Doktor.DoktorSoyad" class="form-control" placeholder="Soyad">
+                    <span asp-validation-for="Doktor.DoktorSoyad" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Doktor.DoktorTc">Kimlik Numarası</label>
+                    <input asp-for="Doktor.DoktorTc" class="form-control" placeholder="Kimlik Numarası" maxlength="11">
+                    <span asp-validation-for="Doktor.DoktorTc" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Doktor.KlinikId">Klinik</label>
+                    @Html.DropDownListFor(a=>a.Doktor.KlinikId, Model.KlinikListesi, "Klinik", new { @class ="form-control", id="list"})
+                    <span asp-validation-for="Doktor.KlinikId" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @if (Model.Doktor == null)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Kaydet</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-secondary form-control">Güncelle</button>
+                        }
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <a asp-action="Index" class="btn btn-success form-control">Listeye Geri Dön</a>
+                    </div>
+                </div>            
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

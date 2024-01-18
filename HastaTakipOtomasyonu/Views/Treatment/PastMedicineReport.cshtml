@@ -1,0 +1,71 @@
+﻿@model HastaTakipOtomasyonu_Model.Models.GecmisMuayene
+@{
+    ViewData["Title"] = "İlaç Raporu";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images/medicines-logo.svg" alt="" width="72" height="72">
+        <h2>İlaç Raporu</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <form>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="GecmisMuayeneId"/>
+                <input type="hidden" asp-for="Muayene.MuayeneId"/>
+                <input type="hidden" asp-for="Muayene.EtkenMadde.EtkenMaddeId"/>
+
+                <h4 class="mb-3">@Model.HastaAdSoyad</h4>
+
+                <div class="mb-3">
+                    <label asp-for="HastaTc">Kimlik Numarası</label>
+                    <input asp-for="HastaTc" class="form-control" readonly>
+                </div>
+
+                <hr class="mb-4">
+                
+                <div class="mb-3">
+                    <label asp-for="Muayene.BaslangicTarihi">Başlangıç Tarihi</label>
+                    <input type="date" asp-for="Muayene.BaslangicTarihi" class="form-control" readonly>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Muayene.BitisTarihi">Bitiş Tarihi</label>
+                    <input type="date" asp-for="Muayene.BitisTarihi" class="form-control" readonly>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Muayene.EtkenMadde.EtkenKodu">Etken Kodu</label>
+                        <input asp-for="Muayene.EtkenMadde.EtkenKodu" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Muayene.EtkenMadde.EtkenAdi">Etken Adı</label>
+                        <input asp-for="Muayene.EtkenMadde.EtkenAdi" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                
+                <div class="mb-3">
+                    <label asp-for="Muayene.KullanimSekli">Kullanım Şekli</label>
+                    <input asp-for="Muayene.KullanimSekli" class="form-control" readonly>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <a asp-action="PastTreatments" class="btn btn-success form-control">Listeye Geri Dön</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

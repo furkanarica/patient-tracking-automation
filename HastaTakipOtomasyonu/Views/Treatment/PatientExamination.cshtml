@@ -1,0 +1,222 @@
+﻿@model HastaTakipOtomasyonu_Model.Models.ViewModels.HastaVM
+@{
+    ViewData["Title"] = "Hasta Muayene";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="container">
+    
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images/treatment-logo.svg" alt="" width="72" height="72">
+        <h2>Hasta Muayene</h2>
+        <p class="lead">Lütfen aşağıdaki tüm bilgileri eksiksiz bir şekilde doldurunuz.</p>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Hasta.HastaId" />
+                <input type="hidden" asp-for="Hasta.Muayene.MuayeneId" />
+
+                <h4 class="mb-3">@Model.Hasta.HastaAdSoyad</h4>
+
+                <div class="mb-3">
+                    <label asp-for="Hasta.HastaTc">Kimlik Numarası</label>
+                    <input asp-for="Hasta.HastaTc" class="form-control" readonly>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Hasta.Muayene.Teshis">Hastalık Teşhisi</label>
+                    <input asp-for="Hasta.Muayene.Teshis" class="form-control" placeholder="Teşhis">
+                    <span asp-validation-for="Hasta.Muayene.Teshis" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Hasta.Muayene.Test">İstenilen Testler</label>
+                    <select asp-for="Hasta.Muayene.Test" class="form-control">
+                        <option value="">İstenilen Testler</option>
+                        <option>Test Yapılmadı</option>
+                        <option>Mr</option>
+                        <option>Kan</option>
+                        <option>İdrar</option>
+                        <option>Röntgen</option>
+                        <option>Ultrason</option>
+                    </select>
+                    <span asp-validation-for="Hasta.Muayene.Test" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Hasta.Muayene.Durum">Hasta Durumu</label>
+                    <select asp-for="Hasta.Muayene.Durum" class="form-control">
+                        <option value="">Hasta Durumu</option>
+                        <option>Muayene Tamamlandı</option>
+                        <option>Yatış Verilecek</option>
+                        <option>Taburcu Edilecek</option>
+                    </select>
+                    <span asp-validation-for="Hasta.Muayene.Durum" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Hasta.Muayene.Sonuc">Muayene Sonucu</label>
+                    <textarea asp-for="Hasta.Muayene.Sonuc" class="form-control" rows="5" cols="33" placeholder="Muayene Sonucu"></textarea>
+                    <span asp-validation-for="Hasta.Muayene.Sonuc" class="text-danger"></span>
+                </div>
+                
+                <h4 class="mb-3">İlaç Raporu</h4>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Hasta.Muayene.BaslangicTarihi">Başlangıç Tarihi</label>
+                        <input type="date" asp-for="Hasta.Muayene.BaslangicTarihi" class="form-control" placeholder="mm/dd/yyyy">
+                        <span asp-validation-for="Hasta.Muayene.BaslangicTarihi" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Hasta.Muayene.BitisTarihi">Bitiş Tarihi</label>
+                        <input type="date" asp-for="Hasta.Muayene.BitisTarihi" class="form-control" placeholder="mm/dd/yyyy">
+                        <span asp-validation-for="Hasta.Muayene.BitisTarihi" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Hasta.Muayene.EtkenMaddeId">Etken Adı</label>
+                    @Html.DropDownListFor(a=>a.Hasta.Muayene.EtkenMaddeId, Model.EtkenListesi, "Etken Adı", new { @class ="form-control"})
+                    <span asp-validation-for="Hasta.Muayene.EtkenMaddeId" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="mb-3">
+                    <label asp-for="Hasta.Muayene.KullanimSekli">Kullanım Şekli</label>
+                    <input asp-for="Hasta.Muayene.KullanimSekli" class="form-control" placeholder="Kullanım Şekli">
+                    <span asp-validation-for="Hasta.Muayene.KullanimSekli" class="text-danger"></span>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @if (Model.Hasta.Muayene == null)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Kaydet</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-secondary form-control">Güncelle</button>
+                        }
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <a asp-action="Index" class="btn btn-success form-control">Listeye Geri Dön</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+@*
+<div class="modal fade" id="raporModal">
+    
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 class="modal-title">İlaç Raporu</h4>
+                <img src="/images/medicine-logo.svg" alt="" width="36" height="36">
+                <button type="button" class="close" data-dismiss="modal">
+                    <spam>&times;</spam>
+                </button>
+            </div>
+            
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Hasta.HastaId" />
+                <input type="hidden" asp-for="Hasta.IlacRapor.IlacRaporId" />
+                
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label asp-for="Hasta.HastaAdSoyad">Ad Soyad</label>
+                        <input asp-for="Hasta.HastaAdSoyad" class="form-control" readonly>
+                    </div>
+
+                    <hr class="mb-4">
+
+                    <div class="mb-3">
+                        <label asp-for="Hasta.HastaTc">Kimlik Numarası</label>
+                        <input asp-for="Hasta.HastaTc" class="form-control" readonly>
+                    </div>
+
+                    <hr class="mb-4">
+
+                    <div class="mb-3">
+                        <label asp-for="Hasta.IlacRapor.BaslangıcTarihi">Başlangıç Tarihi</label>
+                        <input type="date" asp-for="Hasta.IlacRapor.BaslangıcTarihi" class="form-control" placeholder="mm/dd/yyyy">
+                        <span asp-validation-for="Hasta.IlacRapor.BaslangıcTarihi" class="text-danger"></span>
+                    </div>
+
+                    <hr class="mb-4">
+                    
+                    <div class="mb-3">
+                        <label asp-for="Hasta.IlacRapor.BitisTarihi">Bitiş Tarihi</label>
+                        <input type="date" asp-for="Hasta.IlacRapor.BitisTarihi" class="form-control" placeholder="mm/dd/yyyy">
+                        <span asp-validation-for="Hasta.IlacRapor.BitisTarihi" class="text-danger"></span>
+                    </div>
+                                      
+                    <hr class="mb-4">
+                    
+                    <div class="mb-3">
+                        <label asp-for="Hasta.IlacRapor.EtkenMaddeId">Etken Adı</label>
+                        @Html.DropDownListFor(a=>a.Hasta.IlacRapor.EtkenMaddeId, Model.EtkenListesi, "Etken Adı", new { @class ="form-control"})
+                        <span asp-validation-for="Hasta.IlacRapor.EtkenMaddeId" class="text-danger"></span>
+                    </div>
+
+                    <hr class="mb-4">
+
+                    <div class="mb-3">
+                        <label asp-for="Hasta.IlacRapor.KullanımSekli">Kullanım Şekli</label>
+                        <input asp-for="Hasta.IlacRapor.KullanımSekli" class="form-control" placeholder="Kullanım Şekli">
+                        <span asp-validation-for="Hasta.IlacRapor.KullanımSekli" class="text-danger"></span>
+                    </div>
+                
+                </div>
+                
+                <div class="modal-footer">
+                    @if(Model.Hasta.IlacRapor == null)
+                    {
+                        <button type="submit" class="btn btn-primary" asp-action="UpdateInsert_Medicine">Oluştur</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary" asp-action="UpdateInsert_Medicine">Güncelle</button>
+                    }
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                </div>     
+            
+            </form>
+        
+        </div>
+    
+    </div>
+
+</div>*@
+
+
+

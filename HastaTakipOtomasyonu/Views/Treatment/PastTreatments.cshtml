@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HastaTakipOtomasyonu_Model.Models.GecmisMuayene>
+@{
+    ViewData["Title"] = "Geçmiş Muayeneler";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-9">
+        <h4 class="text-info">Geçmiş Muayeneler</h4>
+    </div>
+</div>
+
+<br />
+
+<div>
+    @if (Model.Count() > 0)
+    {
+        <table id="tblGecmisMuayene" class="table table-sm table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">TC No</th>
+                    <th>Hasta Adı Soyadı</th>
+                    <th>Muayene Tarihi</th>
+                    <th>İşlem Durumu</th>
+                    <th>Hasta Detay</th>
+                    <th>Muayene Detay</th>
+                    <th>İlaç Raporu</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.HastaTc</th>
+                    <td>@item.HastaAdSoyad</td>
+                    <td>@item.HastaGirisTarihi</td>
+                    <td>@item.Muayene.IslemDurumu</td>
+                    <td>
+                        <a class="btn btn-success text-white" asp-action="PastPatientDetail" asp-route-Id="@item.GecmisMuayeneId">Hasta Detay</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary text-white" asp-action="PastTreatmentDetail" asp-route-Id="@item.GecmisMuayeneId">Muayene Detay</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger text-white" asp-action="PastMedicineReport" asp-route-Id="@item.GecmisMuayeneId">İlaç Raporu</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <p>Listelenecek herhangi bir geçmiş muayene bulunamadı...</p>
+    }
+</div>
+
