@@ -1,5 +1,6 @@
 # Patient Tracking Automation
 ## Project Details
+
 This project has been developed on MVC architecture with ASP.NET Core for the following purposes:
   
     • Recording personal and medical information of the patients
